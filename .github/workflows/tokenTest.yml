@@ -19,3 +19,13 @@ jobs:
         script: |
           let id_token = await core.getIDToken('test')
           core.setOutput('id_token', id_token)
+    - name: HTTP Request Action
+      id: tokenInspect
+      uses: fjogeleit/http-request-action@v1.16.2
+      with:
+        url: 'https://jwt-eqgahndhbkbzc3bk.b01.azurefd.net/'
+        method: 'GET'
+        customHeaders: '{"Content-Type": "application/json", "Authorization": "Bearer ${{ steps.idtoken.outputs.id_token }}"}'
+    - name: Show Response
+      run: |
+        echo ${{ steps.tokenInspect.outputs.response }}
