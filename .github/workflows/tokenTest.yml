@@ -1,3 +1,5 @@
+name: TokenTest
+
 on:
   workflow_dispatch:
 permissions:
