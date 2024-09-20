@@ -1,0 +1,16 @@
+name: 'Token Inspector Action'
+description: 'Inspect a jwt token'
+inputs:
+    token:
+        description: 'token to inspect'
+        required: true
+outputs:
+    issuer:
+        description: 'token issuer'
+    subject:
+        description: 'token subject'
+    claims:
+        description: 'all token claims'
+runs:
+    using: 'node20'
+    main: 'dist/index.js'
