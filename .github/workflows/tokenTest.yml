@@ -21,7 +21,7 @@ jobs:
         script: |
           let id_token = await core.getIDToken('test')
           core.setOutput('id_token', id_token)
-    - name: HTTP Request Action
+    - name: Token Inspect
       id: tokenInspect
       uses: ./
       with:
