@@ -1,6 +1,10 @@
 name: TokenTest
 
 on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 permissions:
   id-token: write
@@ -28,3 +32,10 @@ jobs:
       uses: ./
       with:
         token: ${{ steps.idtoken.outputs.id_token }}
+    - name: output consumers
+      run : |
+        echo "Issuer: ${{ steps.tokenInspect.outputs.issuer }}"
+        echo "Subject: ${{ steps.tokenInspect.outputs.subject }}"
+        echo "Audience: ${{ steps.tokenInspect.outputs.audience }}"
+        echo "ref_type: ${{ steps.tokenInspect.outputs.claim_ref_type }}"
+        echo "event_name: ${{ steps.tokenInspect.outputs.claim_event_name }}"

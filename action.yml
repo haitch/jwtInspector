@@ -9,8 +9,10 @@ outputs:
         description: 'token issuer'
     subject:
         description: 'token subject'
-    claims:
-        description: 'all token claims'
+    audience:
+        description: 'token audience'
+    claims-key:
+        description: 'this is dynamic list of key-value, all keys are prefixed with "claims."'
 runs:
     using: 'node20'
     main: 'dist/index.js'

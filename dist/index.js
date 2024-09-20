@@ -26850,7 +26850,7 @@ tokens.forEach((token, index) => {
     }
 
     Object.entries(claims).forEach((key, value) => {
-        core.setOutput(`claim-${key}`, JSON.stringify(value));
+        core.setOutput(`claim_${key}`, JSON.stringify(value));
     });
 });
 })();
