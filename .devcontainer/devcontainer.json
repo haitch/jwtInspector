@@ -10,6 +10,6 @@
       "memory": "16gb",
       "storage": "32gb"
     },
-    "postStartCommand": "/workspaces/arm-deploy/.devcontainer/repo_init.sh",
+    "postStartCommand": "/workspaces/jwtInspector/.devcontainer/repo_init.sh",
     "name": "arm-deploy githubAction devcontainer"
 }
