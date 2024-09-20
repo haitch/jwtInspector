@@ -27,8 +27,8 @@ tokens.forEach((token, index) => {
         core.setOutput('audience', claims.aud);
     }
 
-    Object.entries(claims).forEach((key, value) => {
+    for (const [key, value] of Object.entries(object1)) {
         core.setOutput(`claim_${key}`, JSON.stringify(value));
         core.debug(`adding output claim_${key}: ${JSON.stringify(value)}`);
-    });
+    }
 });
