@@ -22,7 +22,7 @@ jobs:
         script: |
           let id_token = await core.getIDToken('test')
           core.setOutput('id_token', id_token)
-          core.log(id_token.length)
+          core.info(id_token.length)
     - name: Token Inspect
       id: tokenInspect
       uses: ./
