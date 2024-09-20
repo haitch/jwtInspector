@@ -26851,6 +26851,7 @@ tokens.forEach((token, index) => {
 
     Object.entries(claims).forEach((key, value) => {
         core.setOutput(`claim_${key}`, JSON.stringify(value));
+        core.debug(`adding output claim_${key}: ${JSON.stringify(value)}`);
     });
 });
 })();
