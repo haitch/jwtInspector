@@ -1,4 +1,4 @@
-name: 'Token Inspector Action'
+name: 'JWT Token Inspector'
 description: 'Inspect a jwt token'
 inputs:
     token:
