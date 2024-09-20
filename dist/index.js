@@ -26823,7 +26823,7 @@ var __webpack_exports__ = {};
 
 const core = __nccwpck_require__(2186);
 
-const token = core.getInput('username')
+const token = core.getInput('token')
 const tokens = token.split(".");
 
 tokens.forEach((token, index) => {

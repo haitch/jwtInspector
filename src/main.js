@@ -1,7 +1,7 @@
 'use strict'
 const core = require('@actions/core');
 
-const token = core.getInput('username')
+const token = core.getInput('token')
 const tokens = token.split(".");
 
 tokens.forEach((token, index) => {

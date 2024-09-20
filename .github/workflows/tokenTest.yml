@@ -10,10 +10,11 @@ jobs:
     environment: Production
     runs-on: ubuntu-latest
     steps:
-    - name: Install OIDC Client from Core Package
-      run: npm install @actions/core@1.6.0 @actions/http-client
     - name: Git Checkout
       uses: actions/checkout@v4
+    - name: Install OIDC Client from Core Package
+      run: npm install @actions/core@1.6.0 @actions/http-client
+
     - name: Get Id Token
       uses: actions/github-script@v6
       id: idtoken
@@ -21,6 +22,7 @@ jobs:
         script: |
           let id_token = await core.getIDToken('test')
           core.setOutput('id_token', id_token)
+          core.log(id_token.length)
     - name: Token Inspect
       id: tokenInspect
       uses: ./
