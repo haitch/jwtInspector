@@ -26811,6 +26811,46 @@ module.exports = parseParams
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__nccwpck_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__nccwpck_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__nccwpck_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__nccwpck_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/compat */
 /******/ 	
 /******/ 	if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = __dirname + "/";
@@ -26820,37 +26860,53 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.
 (() => {
 "use strict";
+__nccwpck_require__.r(__webpack_exports__);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(2186);
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__nccwpck_require__.n(_actions_core__WEBPACK_IMPORTED_MODULE_0__);
 
-const core = __nccwpck_require__(2186);
 
-const token = core.getInput('token')
+
+
+// Getting the 'token' input from the githubAction
+const token = (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.getInput)('token');
+
+// jwt token is constructed as 'header.payload.signature'
 const tokens = token.split(".");
 
+// decode each section
 tokens.forEach((token, index) => {
+    // signature part, we are not verifying it for now.
     if (index >= 2) {
         return;
     }
+
+    // header part
     if (index === 0) {
-        core.info("Header:");
-        core.info(JSON.stringify(JSON.parse(atob(token)), null, 4));
+        (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.info)("Header:");
+        // Base64 decode -> Parse -> Pretty print
+        (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.info)(JSON.stringify(JSON.parse(atob(token)), null, 4));
         return;
     }
 
-    core.info("Payload:");
-    const claims = JSON.parse(atob(token))
-    core.info(JSON.stringify(claims, null, 4));
+    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.info)("Payload:");
+    // Base64 decode -> Parse
+    const claims = JSON.parse(atob(token));
+    (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.info)(JSON.stringify(claims, null, 4));
+
+    // output the important claims
     if (claims.iss) {
-        core.setOutput('issuer', claims.iss);
+        (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)('issuer', claims.iss);
     }
     if (claims.sub) {
-        core.setOutput('subject', claims.sub);
+        (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)('subject', claims.sub);
     }
     if (claims.aud) {
-        core.setOutput('audience', claims.aud);
+        (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)('audience', claims.aud);
     }
 
+    // output the rest with a prefix
     for (const [key, value] of Object.entries(claims)) {
-        core.setOutput(`claim_${key}`, JSON.stringify(value));
+        (0,_actions_core__WEBPACK_IMPORTED_MODULE_0__.setOutput)(`claim_${key}`, JSON.stringify(value));
     }
 });
 })();
