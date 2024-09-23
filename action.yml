@@ -1,5 +1,8 @@
 name: 'JWT Token Inspector'
 description: 'Inspect a jwt token'
+branding:
+  icon: 'user-check'
+  color: 'purple'
 inputs:
     token:
         description: 'token to inspect'
