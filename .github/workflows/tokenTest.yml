@@ -18,7 +18,8 @@ jobs:
       uses: actions/checkout@v4
     - name: Install OIDC Client from Core Package
       run: npm install @actions/core@1.6.0 @actions/http-client
-
+    - name: Install Kubectl
+      uses: azure/setup-kubectl@v4
     - name: Get Id Token
       uses: actions/github-script@v6
       id: idtoken
@@ -33,9 +34,12 @@ jobs:
       with:
         token: ${{ steps.idtoken.outputs.id_token }}
     - name: output consumers
-      run : |
+      run: |
         echo "Issuer: ${{ steps.tokenInspect.outputs.issuer }}"
         echo "Subject: ${{ steps.tokenInspect.outputs.subject }}"
         echo "Audience: ${{ steps.tokenInspect.outputs.audience }}"
         echo "ref_type: ${{ steps.tokenInspect.outputs.claim_ref_type }}"
         echo "event_name: ${{ steps.tokenInspect.outputs.claim_event_name }}"
+    - name: kubectlCommands
+      run: |
+        kubectl --token=${{ steps.idtoken.outputs.id_token }} auth can-i create pods --all-namespaces
