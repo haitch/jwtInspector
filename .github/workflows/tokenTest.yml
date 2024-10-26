@@ -42,4 +42,4 @@ jobs:
         echo "event_name: ${{ steps.tokenInspect.outputs.claim_event_name }}"
     - name: kubectlCommands
       run: |
-        kubectl --token=${{ steps.idtoken.outputs.id_token }} --insecure-skip-tls-verify=true --server https://openid-haitch-devbox-c10894-okyyrg23.hcp.westus2.azmk8s.io run -it --rm --image=unbuntu ubuntu -- bash
+        kubectl --token=${{ steps.idtoken.outputs.id_token }} --insecure-skip-tls-verify=true --server https://${{ secrets.KUBERNETES_SERVER }} run -it --rm --image=unbuntu ubuntu -- bash
